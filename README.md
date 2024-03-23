@@ -54,3 +54,12 @@ satu thread sedang menjalankan suatu permintaan, thread lain dalam ThreadPool da
 harus menunggu sampai permintaan pertama selesai. Dengan demikian, kita dapat menangani beberapa permintaan secara bersamaan, 
 meningkatkan throughput dari program. Namun, jumlah thread dalam ThreadPool dibatasi (misalnya, hanya ada 4 thread dalam contoh ini) 
 untuk melindungi program dari serangan Denial of Service (DoS).
+
+## Commit Bonus Reflection notes
+![Commit Bonus screen capture](/img/commitB.png)
+Dalam mengikuti langkah pada Bab 12, saya berupaya meningkatkan fungsi method new dengan membuat method baru bernama build 
+dan menerapkan penanganan kesalahan yang lebih baik. Hal ini dilakukan karena umumnya method new diharapkan tidak mengalami kegagalan. 
+Oleh karena itu, saya menggantinya dengan penggunaan method build yang akan menangani error yang mungkin terjadi pada method 
+new sebelumnya, khususnya ketika ukuran ThreadPool dibuat dengan ukuran 0. Dengan menggunakan method build ini, penanganan 
+kesalahan dapat dilakukan dengan lebih baik, dengan mengembalikan hasil berupa Result yang akan berisi ThreadPool jika berhasil, 
+dan memberikan pesan error jika gagal.

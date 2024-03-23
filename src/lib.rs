@@ -18,8 +18,10 @@ impl ThreadPool {
     /// # Panics
     ///
     /// The `new` function will panic if the size is zero.
-    pub fn new(size: usize) -> ThreadPool {
-        assert!(size > 0);
+    pub fn build(size: usize) -> Result<ThreadPool, &'static str> {
+        if size == 0 {
+            return Err("Pool size cannot be zero");
+        }
 
         let (sender, receiver) = mpsc::channel();
 
@@ -31,7 +33,7 @@ impl ThreadPool {
             workers.push(Worker::new(id, Arc::clone(&receiver)));
         }
 
-        ThreadPool { workers, sender }
+        Ok(ThreadPool { workers, sender })
     }
 
     pub fn execute<F>(&self, f: F)

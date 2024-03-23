@@ -38,3 +38,11 @@ Berdasarkan langkah-langkah yang dijelaskan pada Chapter 20:
 
 - Kita dapat memisahkan respons yang diberikan dengan melakukan pengecekan pada request_line apakah sama dengan request line ke path /. Jika iya, akan mengirimkan hello.html, jika tidak, akan ke 404.html
 - Kode yang awalnya ditulis perlu di-refactor karena masih terdapat duplikasi kode. Dengan melakukan refactoring, blok if-else hanya akan berisi kode yang membedakan kedua kondisi saja dan menghilangkan kode yang bersifat redundan
+
+## Commit 4 Reflection notes
+Dalam simulasi ini, ada 2 jenis request yang dapat dilakukan: path `/` dan `/sleep`. Jika kita mengakses path `/`, 
+halaman akan segera dimuat, sedangkan path `/sleep` akan menunda pemrosesan selama 10 detik sebelum halaman dimuat. Namun, 
+jika kita mengakses path `/sleep` terlebih dahulu, dan kemudian path `/`, keduanya akan mengalami penundaan selama 10 detik 
+karena path `/` harus menunggu sampai permintaan `/sleep` selesai diproses. Hal ini disebabkan oleh sifat single-threaded 
+server, yang berarti bahwa server hanya dapat memproses satu permintaan pada satu waktu. Server tidak akan memproses 
+request kedua sebelum permintaan pertama selesai. Situasi ini dapat menjadi lebih buruk jika jumlah request bertambah.

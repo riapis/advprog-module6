@@ -46,3 +46,11 @@ jika kita mengakses path `/sleep` terlebih dahulu, dan kemudian path `/`, keduan
 karena path `/` harus menunggu sampai permintaan `/sleep` selesai diproses. Hal ini disebabkan oleh sifat single-threaded 
 server, yang berarti bahwa server hanya dapat memproses satu permintaan pada satu waktu. Server tidak akan memproses 
 request kedua sebelum permintaan pertama selesai. Situasi ini dapat menjadi lebih buruk jika jumlah request bertambah.
+
+## Commit 5 Reflection notes
+Untuk menerapkan konsep multithreading dalam program, salah satu pendekatan yang dapat digunakan adalah dengan menggunakan 
+ThreadPool. ThreadPool adalah sebuah kumpulan thread yang telah diinisialisasi dan siap untuk mengeksekusi tugas. Ketika 
+satu thread sedang menjalankan suatu permintaan, thread lain dalam ThreadPool dapat menjalankan permintaan lain tanpa 
+harus menunggu sampai permintaan pertama selesai. Dengan demikian, kita dapat menangani beberapa permintaan secara bersamaan, 
+meningkatkan throughput dari program. Namun, jumlah thread dalam ThreadPool dibatasi (misalnya, hanya ada 4 thread dalam contoh ini) 
+untuk melindungi program dari serangan Denial of Service (DoS).
